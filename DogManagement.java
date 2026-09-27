@@ -68,34 +68,37 @@ public class DogManagement { // class that contains your program
 
     }
 
-    public static int Attendantrecording() { // first creationg of the record for each array 
-        if (menuoption == [0]);
-        System.out.println("The following information has been entered:");
+    public static void Attendantrecording() { // first creationg of the record for each array 
+        System.out.println("Please filled out form:");  // user just needs to go in and filled out dog ID information 
 
-        if (dogcount >= dogID.length) {
-            System.out.prinln("Dog record storage is full")
+        if (dogcount >= dogID.length) { // keep track of the amount of dogs we want to add 
+            System.out.println("Dog record storage is full");   // were making sure we have space in storage to keep adding dog information 
+        } else { // else will always run as logn as memory is never full 
+            System.out.print("Enter do dog ID :");
+            int entereddogID = Integer.parseInt(scn.nextLine());
+
+            System.out.print("Enter dog name");   // storing dog information 
+            String enterdogname = (scn.nextLine());
+
+            System.out.print("Enter dog age:");
+            int enterdogage = Integer.parseInt(scn.nextLine());
+
+            System.out.print("Enter dog weight:");
+            Double enterdogweight = Double.parseDouble(scn.nextLine());
+
+            // we need to indentify the index of each input to get the right array when user comes back to get information
+            dogID[dogcount] = entereddogID; // this is adding to the array each time we make a record 
+            dogname[dogcount] = enterdogname;
+            dogweight[dogcount] = enterdogweight;
+            dogage[dogcount] = enterdogage;
+
+            dogcount++;
+
         }
-        System.out.println("Enter do dog ID :" + dogID);
-        int entereddogID = Integer.parseInt(scn.nextLine());
-
-        System.out.println("Enter dog name" + dogname);
-        String enterdogname = (scn.nextLine());
-
-        System.out.println("Enter dog age" + dogage);
-        int enterdogage = Integer.parseInt(scn.nextLine());
-
-        System.out.println("Enter dog age" + dogweight);
-        double enterdogweight = Double.parseDouble(scn.nextLine());
-        dogID[dogcount]
-                            dogname[dogcount]
-                            dogweight[dogcount]
-                            dogage[dogcount]
-
-        dogcount++;
     }
 
     public static int updaterecord() {
-        System.out.println("")
+        System.out.println("");
         for (int index = 0; < dogCount; index++) {
             if (dogIDs[index] == idtofind) {
                 return;
@@ -106,7 +109,7 @@ public class DogManagement { // class that contains your program
 
     public static int getrecord() {
         if (menuoption == 2) {
-            for (dogID ==            )
+            for (dogID ==                )
 
         }
 
