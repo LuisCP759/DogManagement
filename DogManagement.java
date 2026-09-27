@@ -29,14 +29,32 @@ public class DogManagement { // class that contains your program
 
     public static void main(String[] args) throws Exception {  // main nothing here yet
         welcome();
-        int choice = displayPrompt();
-        if (choice == 1) {
-            Attendantrecording();
+        boolean running = true;
+        while (running) { // while loop will show the menu 
+            int choice = displayPrompt();  // ask the user for chice and returns a number 
+            switch (choice) { // calls the matching method 
+                case 1:
+                    Attendantrecording();
+                    break; // breaks execution from the continuining into the next case 
+                case 2:
+                    getrecord();
+                    break;
+                //case 3:
+                //  updaterecord();
+                //break;
+                //case 4:
+                //  System.out.println("Exiting Dog Management");
+                //running = false;
+                //break;
+
+                default:
+                    System.out.println("Invalid menu option");
+
+            }
+
         }
+    }    //Welcome method that outputs introductory text explaining program
 
-    }
-
-    //Welcome method that outputs introductory text explaining program
     public static void welcome() { // only function is to welcome display 
         System.out.println("Welcome, this program allows for a care attendant to be able to create, retrieve and update a dog record from the system.");
     }
@@ -69,15 +87,15 @@ public class DogManagement { // class that contains your program
     }
 
     public static void Attendantrecording() { // first creationg of the record for each array 
-        System.out.println("Please filled out form:");  // user just needs to go in and filled out dog ID information 
+        System.out.println("Please filled out form:");  // usec just needs to go in and filled out dog ID information 
 
         if (dogcount >= dogID.length) { // keep track of the amount of dogs we want to add 
             System.out.println("Dog record storage is full");   // were making sure we have space in storage to keep adding dog information 
         } else { // else will always run as logn as memory is never full 
-            System.out.print("Enter do dog ID :");
+            System.out.print("Enter do dog ID:");
             int entereddogID = Integer.parseInt(scn.nextLine());
 
-            System.out.print("Enter dog name");   // storing dog information 
+            System.out.print("Enter dog name:");   // storing dog information 
             String enterdogname = (scn.nextLine());
 
             System.out.print("Enter dog age:");
@@ -97,27 +115,29 @@ public class DogManagement { // class that contains your program
         }
     }
 
-    public static int updaterecord() {
-        System.out.println("");
-        for (int index = 0; < dogCount; index++) {
-            if (dogIDs[index] == idtofind) {
-                return;
+    public static int finddogrecord() { // this will search for the index of the ID before we go into updating or displaying the info 
+        System.out.print("Enter dog ID:");
+        int idtofind = Integer.parseInt(scn.nextLine());
+        for (int index = 0; index < dogcount; index++) {
+            if (dogID[index] == idtofind) {
+                return index;
+
             }
-        }
-        System.out.println("No dog ID found")
-    }
-
-    public static int getrecord() {
-        if (menuoption == 2) {
-            for (dogID ==                )
 
         }
-
+        return -1;
     }
 
-    public static int exitprogram() {
-        if (menuoption == 4) {
+    public static void getrecord() {
+        int index = finddogrecord();
+        if (index == -1) {
+            System.out.println("No dog ID visible");
 
         }
+        System.out.println("Dog ID:" + dogID[index]);
+        System.out.println("Name:" + dogname[index]);
+        System.out.println("Age" + dogage[index]);
+        System.out.println("Weight" + dogweight[index]);
     }
+
 }
