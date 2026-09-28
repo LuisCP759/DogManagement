@@ -18,10 +18,12 @@ public class DogManagement { // class that contains your program
     // we need to have variables where we will stored the dogs information when user input is given 
     //The class-level arrays are the storage: they keep those details after the method finishes, 
     //so the get and update methods can use them later.
-    static int[] dogID = new int[12];
-    static String[] dogname = new String[12];
-    static Double[] dogweight = new Double[12];
-    static int[] dogage = new int[12];
+    private static final int Max_Dogs = 12;
+
+    static int[] dogID = new int[Max_Dogs];
+    static String[] dogname = new String[Max_Dogs];
+    static Double[] dogweight = new Double[Max_Dogs];
+    static int[] dogage = new int[Max_Dogs];
     static int dogcount = 0;
 
     static Scanner scn = new Scanner(System.in);
@@ -88,7 +90,7 @@ public class DogManagement { // class that contains your program
     public static void Attendantrecording() { // first creationg of the record for each array 
         System.out.println("Please filled out form:");  // usec just needs to go in and filled out dog ID information 
 
-        if (dogcount >= dogID.length) { // keep track of the amount of dogs we want to add 
+        if (dogcount >= Max_Dogs) { // keep track of the amount of dogs we want to add 
             System.out.println("Dog record storage is full");   // were making sure we have space in storage to keep adding dog information 
         } else { // else will always run as logn as memory is never full 
             System.out.print("Enter dog ID:");
@@ -131,7 +133,7 @@ public class DogManagement { // class that contains your program
         int index = finddogrecord();
         if (dogcount == 0) {
             System.out.println("No dog ID visible");
-
+            return;
         } //now user will be able to see the informaiton of the dog 
         System.out.println("Available dog IDs");
         for (int ID = 0; ID < dogcount; ID++) {
@@ -167,6 +169,10 @@ public class DogManagement { // class that contains your program
         dogweight[index] = Double.parseDouble(scn.nextLine());
 
         System.out.println("Dog record updated");
+        System.out.print("ID:");
+        System.out.print("Name:");
+        System.out.print("Age:");
+        System.out.print("Weight");
     }
 
     public static void exitprogram() {
