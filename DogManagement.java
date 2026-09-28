@@ -23,7 +23,6 @@ public class DogManagement { // class that contains your program
     static Double[] dogweight = new Double[12];
     static int[] dogage = new int[12];
     static int dogcount = 0;
-    int selection = 0;
 
     static Scanner scn = new Scanner(System.in);
 
@@ -42,10 +41,10 @@ public class DogManagement { // class that contains your program
                 case 3:
                     updaterecord();
                     break;
-                //case 4:
-                //  System.out.println("Exiting Dog Management");
-                //running = false;
-                //break;
+                case 4:
+                    System.out.println("Exiting Dog Management");
+                    running = false;
+                    break;
 
                 default:
                     System.out.println("Invalid menu option");
@@ -92,7 +91,7 @@ public class DogManagement { // class that contains your program
         if (dogcount >= dogID.length) { // keep track of the amount of dogs we want to add 
             System.out.println("Dog record storage is full");   // were making sure we have space in storage to keep adding dog information 
         } else { // else will always run as logn as memory is never full 
-            System.out.print("Enter do dog ID:");
+            System.out.print("Enter dog ID:");
             int entereddogID = Integer.parseInt(scn.nextLine());
 
             System.out.print("Enter dog name:");   // storing dog information 
@@ -138,6 +137,13 @@ public class DogManagement { // class that contains your program
         for (int ID = 0; ID < dogcount; ID++) {
             System.out.println("Dog ID:" + dogID[ID]); // focus on only getting dog IDS list 
         }
+        if (index == -1) {
+            System.out.println("NO ID found");
+        }
+        System.out.println("ID:" + dogID[index]);
+        System.out.println("Name" + dogname[index]);
+        System.out.println("Age:" + dogage[index]);
+        System.out.println("Weight:" + dogweight[index]);
 
     }
 
@@ -163,4 +169,7 @@ public class DogManagement { // class that contains your program
         System.out.println("Dog record updated");
     }
 
+    public static void exitprogram() {
+        System.out.println("Exit program");
+    }
 }
