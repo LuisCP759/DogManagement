@@ -44,6 +44,10 @@ public class DogManagement { // class that contains your program
                     updaterecord();
                     break;
                 case 4:
+                    displaydogages();
+                    break;
+
+                case 5:
                     System.out.println("Exiting Dog Management");
                     running = false;
                     break;
@@ -67,6 +71,7 @@ public class DogManagement { // class that contains your program
             "Create a dog record",
             "Display dog record",
             "Update dog record",
+            "Display dogs with age in human years",
             "Exit Program"
         };
         for (int row = 0; row < menuoptions.length; row++) { // increase row up to 3 
@@ -112,13 +117,22 @@ public class DogManagement { // class that contains your program
             dogage[dogcount] = enterdogage;
 
             dogcount++;
+            System.out.println("Dog record has been added, Total dogs stored:" + dogcount);
+            System.out.println();
+
+            System.out.println("Displaying Dog Record");
+            int newdogindex = dogcount - 1; //lazy way to keep track of the dog index without having to loop or create if statemnts 
+            System.out.println("ID: " + dogID[newdogindex]); // everytime we decreate a dog coutn is technically the same amount as the index so it keeps track 
+            System.out.println("Name: " + dogname[newdogindex]);
+            System.out.println("Age: " + dogage[newdogindex]);
+            System.out.println("Weight: " + dogweight[newdogindex]);
 
         }
     }
 
     public static int finddogrecord() { // this will search for the index of the ID before we go into updating or displaying the info 
-        System.out.print("Enter dog ID:");
-        int idtofind = Integer.parseInt(scn.nextLine());
+        System.out.print("Enter dog ID:"); // enter dog ID to find 
+        int idtofind = Integer.parseInt(scn.nextLine());//idtofind is the id user use to find loop will go thur the list to find it 
         for (int index = 0; index < dogcount; index++) {
             if (dogID[index] == idtofind) {
                 return index;
@@ -130,7 +144,7 @@ public class DogManagement { // class that contains your program
     }
 
     public static void getrecord() { // this will run for option 2 when user wants to display data 
-        int index = finddogrecord();
+
         if (dogcount == 0) {
             System.out.println("No dog ID visible");
             return;
@@ -138,14 +152,19 @@ public class DogManagement { // class that contains your program
         System.out.println("Available dog IDs");
         for (int ID = 0; ID < dogcount; ID++) {
             System.out.println("Dog ID:" + dogID[ID]); // focus on only getting dog IDS list 
-        }
+            System.out.println();
+        }//finddogrecord() asks the user for an ID and returns its array index.
+        int index = finddogrecord();
         if (index == -1) {
             System.out.println("NO ID found");
+            return;
         }
-        System.out.println("ID:" + dogID[index]);
-        System.out.println("Name" + dogname[index]);
-        System.out.println("Age:" + dogage[index]);
-        System.out.println("Weight:" + dogweight[index]);
+        System.out.println();
+        System.out.println("Displaying ID of choosing");
+        System.out.println("ID: " + dogID[index]);
+        System.out.println("Name: " + dogname[index]);
+        System.out.println("Age: " + dogage[index]);
+        System.out.println("Weight: " + dogweight[index]);
 
     }
 
@@ -156,11 +175,11 @@ public class DogManagement { // class that contains your program
             return;
 
         }
-        System.out.print(" New dog ID:");
-        dogID[index] = Integer.parseInt(scn.nextLine());
+        System.out.print("New dog ID:");
+        dogID[index] = Integer.parseInt(scn.nextLine()); // store and update the information when ask to update the ID and record 
 
         System.out.print("Name:");
-        dogname[index] = scn.nextLine();
+        dogname[index] = scn.nextLine(); // this variable[index] will make sure to grab the correct array location 
 
         System.out.print("Age:");
         dogage[index] = Integer.parseInt(scn.nextLine());
@@ -168,14 +187,37 @@ public class DogManagement { // class that contains your program
         System.out.print("Weight");
         dogweight[index] = Double.parseDouble(scn.nextLine());
 
-        System.out.println("Dog record updated");
-        System.out.print("ID:");
-        System.out.print("Name:");
-        System.out.print("Age:");
-        System.out.print("Weight");
+        System.out.println();
+        System.out.println("Dog record updated"); // show updated record information folowing the index 
+        System.out.println("ID:" + dogID[index]);
+        System.out.println("Name:" + dogname[index]);
+        System.out.println("Age:" + dogage[index]);
+        System.out.println("Weight:" + dogweight[index]);
     }
 
     public static void exitprogram() {
         System.out.println("Exit program");
+    }
+
+    public static void displaydogages() {
+        if (dogcount == 0) { // will verify record of dogs 
+            System.out.println("no dog record to display");
+        }
+        displayDogage(0); // Start recursion with the first dog at index 0
+    }
+
+    private static void displayDogage(int index) {
+        if (index >= dogcount) { // stop recursion after all stored dogs have been displayed
+            return;
+        }
+
+        int ageinhumans = dogage[index] * 15; // variable that will multiply dog years by 15 
+        System.out.println("Displaying dogs age in human years");
+        System.out.println("Name:" + dogname[index]);
+        System.out.println("Age:" + dogage[index]);
+        System.out.println("Age in human years:" + ageinhumans); // Display this dog's age converted to human years, then recursively process the next dog.
+
+        //allow to display the next dog
+        displayDogage(index + 1); // Recursive call moves to the next stored dog
     }
 }
