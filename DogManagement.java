@@ -39,9 +39,9 @@ public class DogManagement { // class that contains your program
                 case 2:
                     getrecord();
                     break;
-                //case 3:
-                //  updaterecord();
-                //break;
+                case 3:
+                    updaterecord();
+                    break;
                 //case 4:
                 //  System.out.println("Exiting Dog Management");
                 //running = false;
@@ -125,19 +125,42 @@ public class DogManagement { // class that contains your program
             }
 
         }
-        return -1;
+        return -1; // return will act as if it was a print saying no dog ID foudn so we keep it the same way 
     }
 
-    public static void getrecord() {
+    public static void getrecord() { // this will run for option 2 when user wants to display data 
         int index = finddogrecord();
-        if (index == -1) {
+        if (dogcount == 0) {
             System.out.println("No dog ID visible");
 
+        } //now user will be able to see the informaiton of the dog 
+        System.out.println("Available dog IDs");
+        for (int ID = 0; ID < dogcount; ID++) {
+            System.out.println("Dog ID:" + dogID[ID]); // focus on only getting dog IDS list 
         }
-        System.out.println("Dog ID:" + dogID[index]);
-        System.out.println("Name:" + dogname[index]);
-        System.out.println("Age" + dogage[index]);
-        System.out.println("Weight" + dogweight[index]);
+
+    }
+
+    public static void updaterecord() {
+        int index = finddogrecord();
+        if (index == -1) {
+            System.out.println("Invalid ID to update record");
+            return;
+
+        }
+        System.out.print(" New dog ID:");
+        dogID[index] = Integer.parseInt(scn.nextLine());
+
+        System.out.print("Name:");
+        dogname[index] = scn.nextLine();
+
+        System.out.print("Age:");
+        dogage[index] = Integer.parseInt(scn.nextLine());
+
+        System.out.print("Weight");
+        dogweight[index] = Double.parseDouble(scn.nextLine());
+
+        System.out.println("Dog record updated");
     }
 
 }
